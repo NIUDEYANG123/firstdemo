@@ -1,4 +1,4 @@
-package com.chinazyjr.mylibrary;
+package com.chinazyjr.mylibrary.utils;
 
 import android.content.Context;
 import android.widget.Toast;
