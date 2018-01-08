@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-import com.chinazyjr.haollyv2.base.BaseApplication;
 
 
 /**
@@ -24,9 +23,6 @@ public class UIUtils {
 
     private static AlertDialog dialog;
 
-    public static Context getContext() {
-        return BaseApplication.getApplication();
-    }
 
     //尺寸转化
     public static int dp2px(int dp, Context context) {
@@ -46,65 +42,65 @@ public class UIUtils {
     /**
      * dip转换px
      */
-    public static int dip2px(int dip) {
-        final float scale = getContext().getResources().getDisplayMetrics().density;
+    public static int dip2px(Context context,int dip) {
+        final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dip * scale + 0.5f);
     }
 
     /**
      * pxz转换dip
      */
-    public static int px2dip(int px) {
-        final float scale = getContext().getResources().getDisplayMetrics().density;
+    public static int px2dip(Context context,int px) {
+        final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (px / scale + 0.5f);
     }
 
 
-    public static View inflate(int resId) {
-        return LayoutInflater.from(getContext()).inflate(resId, null);
+    public static View inflate(Context context,int resId) {
+        return LayoutInflater.from(context).inflate(resId, null);
     }
 
     /**
      * 获取资源
      */
-    public static Resources getResources() {
-        return getContext().getResources();
+    public static Resources getResources(Context context) {
+        return context.getResources();
     }
 
     /**
      * 获取文字
      */
-    public static String getString(int resId) {
-        return getResources().getString(resId);
+    public static String getString(Context context,int resId) {
+        return context.getString(resId);
     }
 
     /**
      * 获取文字数组
      */
-    public static String[] getStringArray(int resId) {
-        return getResources().getStringArray(resId);
+    public static String[] getStringArray(Context context,int resId) {
+        return context.getResources().getStringArray(resId);
     }
 
     /**
      * 获取dimen
      */
-    public static int getDimens(int resId) {
-        return getResources().getDimensionPixelSize(resId);
+    public static int getDimens(Context context,int resId) {
+        return context.getResources().getDimensionPixelSize(resId);
     }
 
     /**
      * 获取drawable
      */
-    public static Drawable getDrawable(int resId) {
-        return getResources().getDrawable(resId);
+    public static Drawable getDrawable(Context context,int resId) {
+        return context.getResources().getDrawable(resId);
     }
 
 
     /**
      * 获取颜色
      */
-    public static int getColor(int resId) {
-        return getResources().getColor(resId);
+    public static int getColor(Context context,int resId) {
+        return context.getResources().getColor(resId);
     }
 
     public static void showToastCommon(final Context context, final String str) {
@@ -116,8 +112,8 @@ public class UIUtils {
     /**
      * 获取颜色选择器
      */
-    public static ColorStateList getColorStateList(int resId) {
-        return getResources().getColorStateList(resId);
+    public static ColorStateList getColorStateList(Context context,int resId) {
+        return context.getResources().getColorStateList(resId);
     }
 
 

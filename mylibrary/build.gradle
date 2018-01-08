@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-
+apply plugin: 'kotlin-android'
 android {
     compileSdkVersion 26
 
@@ -26,17 +26,17 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     implementation 'com.android.support:appcompat-v7:26.+'
     implementation 'com.android.support:design:26.0.0-alpha1'
-    implementation 'io.reactivex:rxjava:1.1.0'
-    implementation 'io.reactivex:rxandroid:1.1.0'
-    implementation 'com.squareup.retrofit2:converter-scalars:2.0.0-beta4'
-    implementation 'com.squareup.retrofit2:adapter-rxjava:2.2.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.2.0'
-    implementation 'com.squareup.retrofit2:retrofit:2.2.0'
-    implementation 'com.google.code.gson:gson:2.6.2'
-    implementation 'com.github.bumptech.glide:glide:3.7.0'
+    api 'io.reactivex:rxjava:1.1.0'
+    api 'io.reactivex:rxandroid:1.1.0'
+    api 'com.squareup.retrofit2:converter-scalars:2.0.0-beta4'
+    api 'com.squareup.retrofit2:adapter-rxjava:2.2.0'
+    api 'com.squareup.retrofit2:converter-gson:2.2.0'
+    api 'com.squareup.retrofit2:retrofit:2.2.0'
+    api 'com.google.code.gson:gson:2.6.2'
+    api 'com.github.bumptech.glide:glide:3.7.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
@@ -56,7 +56,7 @@ group = "com.chinazyjr.githubapplication"
 //发布到JCenter上的项目名字，必须填写
 def libName = "myLibrary"
 // 版本号，下次更新是只需要更改版本号即可
-version = "1.1"
+version = "1.2"
 /**  上面配置后上传至jcenter后的编译路径是这样的： compile 'com.chinazyjr.githubapplication:mylibrary:1.0'  **/
 
 //生成源文件

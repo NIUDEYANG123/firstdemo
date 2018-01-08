@@ -3,7 +3,6 @@ package com.chinazyjr.mylibrary.utils;
 import android.annotation.SuppressLint;
 import android.widget.TextView;
 
-import com.chinazyjr.haollyv2.config.Config;
 
 import java.text.ParseException;
 import java.text.ParsePosition;
@@ -31,9 +30,9 @@ public class DateUtil {
      *
      * @param tv
      */
-    public static Subscription countDown(final TextView tv, final String reset) {
-        final long[] currentTime = {Config.seconds - 1000};
-        tv.setText((Config.seconds - 1000) / 1000 + "s");
+    public static Subscription countDown(long ss,final TextView tv, final String reset) {
+        final long[] currentTime = {ss - 1000};
+        tv.setText((ss - 1000) / 1000 + "s");
         Subscription subscribe = Observable.interval(1, TimeUnit.SECONDS, AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
