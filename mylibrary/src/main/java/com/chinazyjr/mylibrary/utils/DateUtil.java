@@ -4,6 +4,9 @@ import android.annotation.SuppressLint;
 import android.widget.TextView;
 
 
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
+
 import java.text.ParseException;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
@@ -15,11 +18,14 @@ import java.util.Random;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
-import rx.Observable;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
+
 
 @SuppressLint("SimpleDateFormat")
 //时间类型转换的工具类
@@ -30,22 +36,16 @@ public class DateUtil {
      *
      * @param tv
      */
-    public static Subscription countDown(long ss,final TextView tv, final String reset) {
+    public static void countDown(long ss,final TextView tv, final String reset) {
         final long[] currentTime = {ss - 1000};
         tv.setText((ss - 1000) / 1000 + "s");
-        Subscription subscribe = Observable.interval(1, TimeUnit.SECONDS, AndroidSchedulers.mainThread())
+       Observable.interval(1, TimeUnit.SECONDS, AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<Long>() {
+                .subscribe(new Observer<Long>() {
                     @Override
-                    public void onCompleted() {
+                    public void onSubscribe(Disposable d) {
 
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        unsubscribe();
-                        tv.setEnabled(true);
                     }
 
                     @Override
@@ -54,13 +54,23 @@ public class DateUtil {
                         if (currentTime[0] < 0) {
                             tv.setText(reset);
                             tv.setEnabled(true);
-                            unsubscribe();
                         } else {
                             tv.setText(currentTime[0] / 1000 + "s");
                         }
                     }
-                });
-        return subscribe;
+
+                    @Override
+                    public void onError(Throwable e) {
+                        tv.setEnabled(true);
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                }
+                );
     }
 
     /**

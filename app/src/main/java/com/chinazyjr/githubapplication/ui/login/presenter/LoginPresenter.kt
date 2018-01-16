@@ -8,6 +8,16 @@ import com.chinazyjr.haollyv2.base.BasePresenter
 import com.chinazyjr.haollyv2.ui.login.view.LoginView
 import com.chinazyjr.githubapplication.utils.applySchedulers
 import com.chinazyjr.haollyv2.entity.login.LoginBean
+import com.chinazyjr.mylibrary.utils.LogUtils
+import io.reactivex.Observable
+import io.reactivex.ObservableOnSubscribe
+import io.reactivex.ObservableSource
+import io.reactivex.Scheduler
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.functions.Function
+import io.reactivex.functions.Predicate
+import io.reactivex.schedulers.Schedulers
+import org.reactivestreams.Subscriber
 
 /**
  * Created by niudeyang on 2017/12/8.
@@ -48,4 +58,10 @@ class LoginPresenter(val view: Activity) : BasePresenter<LoginView>() {
            getView()!!.login(it) })
         mDisposables.add(disposeble)
     }
-}
+
+    fun testRxjava(phone:String,pass:String){
+        userModel.login(phone,pass).subscribeOn(Schedulers.io())
+                .filter(Predicate<LoginBean>{
+                    return@Predicate it.code.equals("success")
+    }).doOnNext({}).subscribe()
+}}
