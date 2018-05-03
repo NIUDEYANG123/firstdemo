@@ -12,7 +12,7 @@ class Config {
       const val JUID = "juid"
       const val service_phone = "400-999-6780"//好利
       const val seconds = 60000//倒计时时间
-      const val platform = "ZZT"//好利网
+      const val platform = "HLW"//好利网
       const val mer_id_ = "2"//商户号 1卓投 2好利网
       const val from_ = "3"//获客来源1 急借通2 发薪贷 3 卓投
       const val client = "4"//安卓

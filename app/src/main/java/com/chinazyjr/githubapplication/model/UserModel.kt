@@ -3,6 +3,7 @@ package com.chinazyjr.githubapplication.model
 import android.util.Log
 import com.chinazyjr.githubapplication.api.UserApi
 import com.chinazyjr.githubapplication.base.BaseModel
+import com.chinazyjr.githubapplication.utils.AESUtils
 import com.chinazyjr.haollyv2.entity.login.LoginBean
 import io.reactivex.Observable
 
@@ -31,7 +32,7 @@ class UserModel private constructor(): BaseModel(){
      */
 
     fun login(phoneNum: String, passWord: String): Observable<LoginBean> {
-      val map:Map<String,String> = mapOf("phoneNum" to phoneNum,"passWord" to passWord)
+      val map:Map<String,String> = mapOf("phoneNum" to phoneNum,"passWord" to AESUtils.encrypt(passWord))
         return userApi!!.login(map)
     }
 }

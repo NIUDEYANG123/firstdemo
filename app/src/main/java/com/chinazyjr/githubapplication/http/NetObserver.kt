@@ -4,6 +4,7 @@ import android.app.Activity
 import android.util.Log
 import com.chinazyjr.githubapplication.R
 import com.chinazyjr.githubapplication.base.App
+import com.chinazyjr.githubapplication.entity.BaseBean
 import com.chinazyjr.githubapplication.utils.netAvailable
 import com.chinazyjr.haollyv2.base.IBaseView
 

@@ -62,6 +62,6 @@ class LoginActivity : BaseActivity<LoginPresenter, LoginView>(), LoginView, View
         Log.e("loginactivity", it.msg)
     }
 
-    override fun createPresenter(): LoginPresenter = LoginPresenter(this)
+    override fun createPresenter(): LoginPresenter = LoginPresenter(this,this)
 
 }

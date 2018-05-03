@@ -15,6 +15,8 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import com.chinazyjr.githubapplication.base.App
+import com.chinazyjr.githubapplication.base.App.Companion.context
+import com.chinazyjr.mylibrary.base.ActivityCollector
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -77,16 +79,14 @@ inline fun Any.supportL(block: () -> Unit) {
 fun Int.sp2px(): Float = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, this.toFloat(), App.instance.resources.displayMetrics)
 fun Int.dp2px(): Float = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, this.toFloat(), App.instance.resources.displayMetrics)
 fun Float.dp2px(): Float = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, this, App.instance.resources.displayMetrics)
-inline fun <reified T : Activity> Activity.newIntent(action:String) {
+inline fun <reified T : Activity> Activity.newIntent(action: String) {
     val intent = Intent(this, T::class.java)
-    intent.action=action
+    intent.action = action
     startActivity(intent)
 }
 
 fun <T> Observable<T>.applySchedulers(): Observable<T> {
-    return subscribeOn(Schedulers.io()).
-            unsubscribeOn(Schedulers.io()).
-            observeOn(AndroidSchedulers.mainThread())
+    return subscribeOn(Schedulers.io()).unsubscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
 }
 
 /**
@@ -108,4 +108,26 @@ fun Context.obtainColor(resId: Int): Int = if (Build.VERSION.SDK_INT >= Build.VE
     this.resources.getColor(resId, null)
 } else {
     this.resources.getColor(resId)
+}
+
+var exitTime: Long = 0
+
+fun Activity.clickBack(keyCode: Int, event: KeyEvent?): Boolean {
+
+    if (keyCode == KeyEvent.KEYCODE_BACK && event?.action == KeyEvent.ACTION_DOWN) {
+        if (System.currentTimeMillis() - exitTime > 2000) {
+            Toast.makeText(context, "再按一次退出程序", Toast.LENGTH_SHORT)
+            exitTime = System.currentTimeMillis()
+        } else {
+
+            ActivityCollector.finishAll()
+            System.exit(0)
+        }
+        return true
+    }
+    return false
+}
+
+fun toast(str: String) {
+    Toast.makeText(context, str, Toast.LENGTH_SHORT)
 }

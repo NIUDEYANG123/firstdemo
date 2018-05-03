@@ -3,6 +3,7 @@ package com.chinazyjr.haollyv2.base
 import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import com.chinazyjr.mylibrary.base.ActivityCollector
 import com.gyf.barlibrary.ImmersionBar
 
 /**
@@ -18,8 +19,8 @@ abstract class BaseActivity<out T:BasePresenter<V>,V>:AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         TAG=this::javaClass.name
-        mPresenter!!.attach(this as V)
-       // ActivityCollector.addActivity(this)
+        mPresenter.attach(this as V)
+        ActivityCollector.addActivity(this)
         mImmersionBar = ImmersionBar.with(this)
         mImmersionBar!!.statusBarDarkFont(false).init()
     }
@@ -28,12 +29,13 @@ abstract class BaseActivity<out T:BasePresenter<V>,V>:AppCompatActivity(){
 
     override fun onResume() {
         super.onResume()
+
     }
 
     override fun onDestroy() {
         super.onDestroy()
-       // ActivityCollector.removeActivity(this)
-        mPresenter!!.detach()
-        mPresenter!!.unSubscriber()
+        ActivityCollector.removeActivity(this)
+        mPresenter.detach()
+        mPresenter.unSubscriber()
     }
 }

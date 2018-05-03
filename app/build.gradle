@@ -15,8 +15,17 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+            minifyEnabled false
+            buildConfigField("String", "INTERFACE", TEST_INTERFACE_HOST)
+            buildConfigField("String", "INTERFACE_CONTART", TEST_CONTRACT_URL)
+            buildConfigField "boolean", "IS_SHOW_LOG", SHOW_LOG
+        }
         release {
             minifyEnabled false
+            buildConfigField("String", "INTERFACE", NORMAL_INTERFACE_HOST)
+            buildConfigField("String", "INTERFACE_CONTART", NORMAL_CONTRACT_URL)
+            buildConfigField "boolean", "IS_SHOW_LOG", NOT_SHOW_LOG
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -36,5 +45,11 @@ dependencies {
     implementation 'com.aliyun.ams:alicloud-android-hotfix:3.1.9'
     implementation 'com.xw.repo:xedittext:2.0.5@aar'
     implementation 'com.gyf.barlibrary:barlibrary:2.2.7'
+    implementation 'com.androidkun:XTabLayout:1.1.3'
     implementation project(':mylibrary')
+    implementation 'com.github.anzaizai:EasyRefreshLayout:1.3.1'
+    implementation 'com.android.support:recyclerview-v7:26.0.0-alpha1'
+    implementation 'com.bigkoo:ConvenientBanner:2.0.7'
+    implementation 'com.android.support:design:26.1.0'
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.22'
 }
