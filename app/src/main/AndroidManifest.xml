@@ -36,6 +36,7 @@
         <activity android:name="com.chinazyjr.haollyv2.ui.login.LoginActivity">
 
         </activity>
+        <activity android:name=".ui.WebActivity" />
     </application>
 
 </manifest>

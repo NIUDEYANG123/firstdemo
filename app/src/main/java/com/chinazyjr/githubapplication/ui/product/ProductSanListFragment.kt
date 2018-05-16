@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.ajguan.library.EasyRefreshLayout
 import com.chinazyjr.githubapplication.R
+import com.chinazyjr.githubapplication.R.id.easy_layout
+import com.chinazyjr.githubapplication.R.id.recycle_asset
 import com.chinazyjr.githubapplication.adapater.SanListAdapter
 import com.chinazyjr.githubapplication.base.BaseFragment
 import com.chinazyjr.githubapplication.entity.product.BorrowPlanListBean

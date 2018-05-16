@@ -9,6 +9,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.webkit.*
@@ -41,7 +42,7 @@ class WebActivity : BaseActivity<EmptyPresenter, IBaseView>() {
 
     private lateinit var title: String
     private lateinit var html: String
-    private lateinit var content: String
+    private  var content: String?=null
 
     companion object {
         fun getWebIntent(context: Context, title: String, html: String): Intent {
@@ -96,6 +97,7 @@ class WebActivity : BaseActivity<EmptyPresenter, IBaseView>() {
     }
 
     private fun initWebView(html: String?, b: Boolean) {
+        Log.e(TAG,html)
         // 在安卓5.0之后，默认不允许加载http与https混合内容，需要设置webview允许其加载混合网络协议内容
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             web_sh.settings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW

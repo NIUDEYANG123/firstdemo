@@ -62,7 +62,6 @@ class ProductListFragment : BaseFragment<ProductListPresenter, ProductListView>(
         //赢计划
         if (it.model.list.isNotEmpty()) {
             lv_win_plan.adapter = WinListAdapter(it.model.list)
-
         }
     }
 

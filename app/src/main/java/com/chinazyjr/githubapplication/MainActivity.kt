@@ -15,11 +15,14 @@ import android.widget.TextView
 import android.widget.Toast
 import com.chinazyjr.githubapplication.R.id.id_tab_iv_03
 import com.chinazyjr.githubapplication.R.id.id_tab_tv_03
+import com.chinazyjr.githubapplication.inteface.NumEditWatcaher
 import com.chinazyjr.githubapplication.ui.home.HomeFragment
 import com.chinazyjr.githubapplication.ui.home.MyFragment
 import com.chinazyjr.githubapplication.ui.home.ProductFragment
 import com.chinazyjr.githubapplication.ui.login.presenter.EmptyPresenter
 import com.chinazyjr.githubapplication.utils.clickBack
+import com.chinazyjr.githubapplication.utils.ctx
+import com.chinazyjr.githubapplication.utils.openActivity
 import com.chinazyjr.haollyv2.base.BaseActivity
 import com.chinazyjr.haollyv2.base.BasePresenter
 import com.chinazyjr.haollyv2.base.IBaseView
@@ -30,12 +33,9 @@ import kotlinx.android.synthetic.main.public_bottom_main.*
 import java.util.jar.Manifest
 
 class MainActivity : BaseActivity<EmptyPresenter, IBaseView>(), View.OnClickListener {
-    //private var homeFragment: HomeFragment? = null
-    //private var productFragment: ProductFragment? = null
-    //    private FindFragment findFragment;
-    //private var myFragment: MyFragment? = null
     private var fragments: MutableList<Fragment>? = mutableListOf()
-    var currentPage: Int = 0
+    private var currentPage: Int = 0
+
     companion object {
         fun getMainIntent(context: Context, page: Int): Intent {
             val intent = Intent(context, MainActivity::class.java)

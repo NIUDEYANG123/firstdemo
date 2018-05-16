@@ -7,6 +7,7 @@ import android.content.Intent
 import android.os.Build
 import android.speech.RecognizerIntent
 import android.support.v4.app.ActivityCompat.startActivityForResult
+import android.support.v4.content.ContextCompat.startActivity
 import android.util.Log
 import android.util.TypedValue
 import android.view.*
@@ -14,6 +15,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import com.chinazyjr.githubapplication.R
 import com.chinazyjr.githubapplication.base.App
 import com.chinazyjr.githubapplication.base.App.Companion.context
 import com.chinazyjr.mylibrary.base.ActivityCollector
@@ -25,21 +27,12 @@ import org.jetbrains.annotations.NotNull
 /**
  * Created by liuzipeng on 2017/2/15.
  */
-
+//扩展属性
 val View.ctx: Context
     get() = context
 
-
 fun Any.log(msg: String) {
     Log.d(this.javaClass.simpleName, msg)
-}
-
-fun Any.toast(msg: String, length: Int = Toast.LENGTH_SHORT) {
-    Toast.makeText(App.instance, msg, length).show()
-}
-
-fun Any.toast(msg: Int, length: Int = Toast.LENGTH_SHORT) {
-    Toast.makeText(App.instance, msg, length).show()
 }
 
 /**
@@ -112,8 +105,7 @@ fun Context.obtainColor(resId: Int): Int = if (Build.VERSION.SDK_INT >= Build.VE
 
 var exitTime: Long = 0
 
-fun Activity.clickBack(keyCode: Int, event: KeyEvent?): Boolean {
-
+fun clickBack(keyCode: Int, event: KeyEvent?): Boolean {
     if (keyCode == KeyEvent.KEYCODE_BACK && event?.action == KeyEvent.ACTION_DOWN) {
         if (System.currentTimeMillis() - exitTime > 2000) {
             Toast.makeText(context, "再按一次退出程序", Toast.LENGTH_SHORT)
@@ -130,4 +122,14 @@ fun Activity.clickBack(keyCode: Int, event: KeyEvent?): Boolean {
 
 fun toast(str: String) {
     Toast.makeText(context, str, Toast.LENGTH_SHORT)
+}
+
+fun Activity.openActivity(intent: Intent) {
+    startActivity(intent)
+    overridePendingTransition(R.anim.in_anim, R.anim.out_anim)
+}
+
+fun Activity.closeActivity() {
+    finish()
+    overridePendingTransition(R.anim.in_anim_left, R.anim.out_anim_right)
 }
